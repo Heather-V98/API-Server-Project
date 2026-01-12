@@ -1,0 +1,25 @@
+[
+    {
+      "cardId": "C001",
+      "name": "Ember Drake",
+      "set": "Base Set",
+      "type": "Creature",
+      "rarity": "Common",
+      "cost": 2,
+      "power": 2,
+      "health": 1,
+      "text": "When played, deal 1 damage to any target."
+    },
+    {
+      "cardId": "C002",
+      "name": "Frost Sentinel",
+      "set": "Base Set",
+      "type": "Creature",
+      "rarity": "Rare",
+      "cost": 4,
+      "power": 3,
+      "health": 5,
+      "text": "Enemies enter play exhausted."
+    }
+  ]
+  
