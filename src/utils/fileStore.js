@@ -33,7 +33,7 @@ async function updateJson(filePath, updaterFn) {
     const current = await readJson(filePath);
     const updated = await updaterFn(current);
 
-    // Require arrays for this assignment’s files
+   
     if (!Array.isArray(updated)) {
       const err = new Error("Data store must be an array.");
       err.status = 500;

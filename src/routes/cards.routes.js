@@ -6,23 +6,23 @@ const { requireAuth } = require("../middleware/auth");
 const router = express.Router();
 const CARDS_PATH = path.join(__dirname, "..", "..", "data", "cards.json");
 
-// Helper: equality filtering based on query params
+
 function filterCards(cards, query) {
   const keys = Object.keys(query || {});
   if (keys.length === 0) return cards;
 
   return cards.filter((card) => {
     return keys.every((k) => {
-      // only match if card has that field
+      
       if (!(k in card)) return false;
 
-      // Compare as strings for simple equality filtering
+      
       return String(card[k]) === String(query[k]);
     });
   });
 }
 
-// Optional: GET /cards/count
+
 router.get("/cards/count", async (req, res, next) => {
   try {
     const cards = await readJson(CARDS_PATH);
@@ -35,7 +35,7 @@ router.get("/cards/count", async (req, res, next) => {
   }
 });
 
-// Optional: GET /cards/random
+
 router.get("/cards/random", async (req, res, next) => {
   try {
     const cards = await readJson(CARDS_PATH);
@@ -54,7 +54,7 @@ router.get("/cards/random", async (req, res, next) => {
   }
 });
 
-// GET /cards (with equality filters)
+
 router.get("/cards", async (req, res, next) => {
   try {
     const cards = await readJson(CARDS_PATH);
@@ -68,7 +68,7 @@ router.get("/cards", async (req, res, next) => {
   }
 });
 
-// POST /cards/create (protected)
+
 router.post("/cards/create", requireAuth, async (req, res, next) => {
   try {
     const newCard = req.body || {};
@@ -105,7 +105,7 @@ router.post("/cards/create", requireAuth, async (req, res, next) => {
   }
 });
 
-// PUT /cards/:id (protected)
+
 router.put("/cards/:id", requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -121,7 +121,7 @@ router.put("/cards/:id", requireAuth, async (req, res, next) => {
         throw err;
       }
 
-      // If client attempts to change cardId, ensure uniqueness
+      
       if (patch.cardId && patch.cardId !== id) {
         const conflict = cards.some((c) => c.cardId === patch.cardId);
         if (conflict) {
@@ -132,7 +132,7 @@ router.put("/cards/:id", requireAuth, async (req, res, next) => {
       }
 
       const merged = { ...cards[idx], ...patch };
-      // Keep array consistent: if cardId changed, allow it (rubric says ensure unique)
+      
       cards[idx] = merged;
       updatedCard = merged;
       return cards;
@@ -147,7 +147,7 @@ router.put("/cards/:id", requireAuth, async (req, res, next) => {
   }
 });
 
-// DELETE /cards/:id (protected)
+// DELETE 
 router.delete("/cards/:id", requireAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
